@@ -1,0 +1,30 @@
+<h2>Listing ppmps</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Status</th>
+      <th>Year</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for ppmp <- @ppmps do %>
+    <tr>
+      <td><%= ppmp.code %></td>
+      <td><%= ppmp.status %></td>
+      <td><%= ppmp.year %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: ppmp_path(@conn, :show, ppmp), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: ppmp_path(@conn, :edit, ppmp), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: ppmp_path(@conn, :delete, ppmp), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New ppmp", to: ppmp_path(@conn, :new) %>

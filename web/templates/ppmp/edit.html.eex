@@ -1,0 +1,6 @@
+<h2>Edit ppmp</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: ppmp_path(@conn, :update, @ppmp) %>
+
+<%= link "Back", to: ppmp_path(@conn, :index) %>
