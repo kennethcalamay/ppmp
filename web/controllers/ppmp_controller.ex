@@ -53,6 +53,19 @@ defmodule Oppcis.PPMPController do
     end
   end
 
+  def approve(conn, params) do
+    case PPMP.Approve.process(params) do
+      {:ok, ppmp} ->
+        conn
+        |> put_flash(:info, "PPMP updated successfully.")
+        |> redirect(to: ppmp_path(conn, :show, ppmp))
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:alert, "PPMP was not updated.")
+        |> redirect(to: ppmp_path(conn, :index))
+    end
+  end
+
   def delete(conn, %{"id" => id}) do
     ppmp = Repo.get!(PPMP, id)
 
