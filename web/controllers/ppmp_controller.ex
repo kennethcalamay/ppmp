@@ -11,12 +11,12 @@ defmodule Oppcis.PPMPController do
   end
 
   def new(conn, _params) do
-    changeset = PPMP.changeset(%PPMP{})
+    changeset = PPMP.Create.changeset(%PPMP{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"ppmp" => ppmp_params}) do
-    changeset = PPMP.changeset(%PPMP{}, ppmp_params)
+    changeset = PPMP.Create.changeset(%PPMP{}, ppmp_params)
 
     case Repo.insert(changeset) do
       {:ok, _ppmp} ->
