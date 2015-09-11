@@ -16,8 +16,10 @@ defmodule Oppcis.Router do
   scope "/", Oppcis do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
-    resources "/ppmps", PPMPController
+    get "/", PPMPController, :index, as: :root
+    resources "/ppmps", PPMPController do
+      patch "/approve", PPMPController, :approve, as: :approve
+    end
   end
 
   # Other scopes may use custom stacks.
