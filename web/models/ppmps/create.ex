@@ -1,10 +1,5 @@
 defmodule Oppcis.PPMP.Create do
-  use Oppcis.Web, :model
-
-  schema "ppmps" do
-    field :status, :string
-    field :year, :string
-  end
+  use Oppcis.Web, :operation
 
   @required_fields ~w(year)
   @optional_fields ~w(status)
