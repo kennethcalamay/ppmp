@@ -22,6 +22,14 @@ defmodule Oppcis.Web do
     end
   end
 
+  def operation do
+    quote do
+      use Ecto.Model
+      alias Oppcis.Repo
+      schema "", do: nil
+    end
+  end
+
   def controller do
     quote do
       use Phoenix.Controller
