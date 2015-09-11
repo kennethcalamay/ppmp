@@ -10,7 +10,7 @@ defmodule Oppcis.PPMP do
   end
 
   @required_fields ~w(code status year)
-  @optional_fields ~w()
+  @optional_fields ~w(status year)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
