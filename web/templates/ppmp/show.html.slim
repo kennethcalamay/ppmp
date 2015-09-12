@@ -1,7 +1,7 @@
 .pull-right
   .btn-group
     = link "Back", to: ppmp_path(@conn, :index), class: "btn btn-default"
-    button.btn.btn-default type="button" data-toggle="modal" data-target="#new-item-modal" New Item
+    button type="button" class="btn btn-default" data-toggle="modal" data-target="#new-item-modal" New Item
 
 h2 Show PPMP
 
@@ -19,5 +19,5 @@ h2 Show PPMP
   .table-responsive
     = render("attachments.html", assigns)
 
-.modal.fade#new-item-modal role="dialog" aria-labelledby="myModalLabel"
+div class="modal fade" id="new-item-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   = render("new_item_modal.html", assigns)
