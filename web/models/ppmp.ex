@@ -6,6 +6,7 @@ defmodule Oppcis.PPMP do
     field :status, :string
     field :year, :string
 
+    has_many :items, Oppcis.Item
     timestamps
   end
 
