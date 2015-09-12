@@ -1,7 +1,5 @@
 .pull-right
-  .btn-group
-    = link "Back", to: ppmp_path(@conn, :index), class: "btn btn-default"
-    button type="button" class="btn btn-default" data-toggle="modal" data-target="#new-item-modal" New Item
+  = render("action_buttons_show.html", assigns)
 
 h2 Show PPMP
 
