@@ -1,11 +1,51 @@
-div class="modal-dialog" role="document"
+div class="modal-dialog modal-lg" role="document"
   div class="modal-content"
-    div class="modal-header"
-      button type="button" class="close" data-dismiss="modal" aria-label="Close"
-        span aria-hidden="true" &times;
-      h4 class="modal-title" id="myModalLabel" Modal title
-    div class="modal-body"
-      ' ...
-    div class="modal-footer"
-      button type="button" class="btn btn-default" data-dismiss="modal" Close
-      button type="button" class="btn btn-primary" Save changes
+    = form_for @item_changeset, ppmp_item_path(@conn, :create, @ppmp), fn f ->
+
+      div class="modal-header"
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4 class="modal-title" id="myModalLabel" Create a New Procurement Item
+
+      div class="modal-body"
+        .panel.panel-default style="padding: 15px;"
+          .row
+            = render "text_field_group.html", form: f, field: :project, colsize: 5
+            = render "select_field_group.html", form: f, field: :category, colsize: 7, values: categories
+          .row
+            = render "text_field_group.html", form: f, field: :description, colsize: 12
+
+        .panel.panel-default style="padding: 15px;"
+          .row
+            = render "select_field_group.html", form: f, field: :procurement_mode, colsize: 5, values: procurement_modes
+            = render "select_field_group.html", form: f, field: :procurement_type, colsize: 3, values: procurement_types
+            = render "select_field_group.html", form: f, field: :contract_type,    colsize: 4, values: contract_types
+          .row
+            .col-sm-5.form-group
+              = label f, :estimated_budget, class: "control-label"
+              .input-group
+                span.input-group-addon ₱
+                = text_input f, :estimated_budget, class: "form-control"
+            = render "select_field_group.html", form: f, field: :funding, colsize: 7, values: funding_choices
+
+        .panel.panel-default style="padding: 15px;"
+          .row
+            = render "text_field_group.html", form: f, field: :quantity, colsize: 3
+            = render "select_field_group.html", form: f, field: :funding, colsize: 9, values: measurement_units
+          .row
+            = for month <- ~w(Jan Feb Mar Apr May Jun) do
+              .col-sm-2
+                div class="form-group"
+                  label for="exampleInputEmail1" = month
+                  input type="text" class="form-control" id="exampleInputEmail1" placeholder=""
+          .row
+            = for month <- ~w(Jul Aug Sep Oct Nov Dec) do
+              .col-sm-2
+                div class="form-group"
+                  label for="exampleInputEmail1" = month
+                  input type="text" class="form-control" id="exampleInputEmail1" placeholder=""
+
+      div class="modal-footer"
+        button type="button" class="btn btn-default" data-dismiss="modal" Close
+        = submit "Save", class: "btn btn-primary" 
+

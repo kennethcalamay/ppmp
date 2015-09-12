@@ -19,6 +19,7 @@ defmodule Oppcis.Router do
     get "/", PPMPController, :index, as: :root
     resources "/ppmps", PPMPController do
       patch "/approve", PPMPController, :approve, as: :approve
+      resources "/items", ItemController
     end
   end
 

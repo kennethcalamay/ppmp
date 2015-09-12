@@ -2,6 +2,7 @@ defmodule Oppcis.PPMPController do
   use Oppcis.Web, :controller
 
   alias Oppcis.PPMP
+  alias Oppcis.Item
 
   plug :scrub_params, "ppmp" when action in [:create, :update]
 
@@ -30,7 +31,10 @@ defmodule Oppcis.PPMPController do
 
   def show(conn, %{"id" => id}) do
     ppmp = Repo.get!(PPMP, id) |> Repo.preload(:items)
-    render(conn, "show.html", ppmp: ppmp)
+
+    item_changeset = Item.changeset(%Item{})
+
+    render(conn, "show.html", ppmp: ppmp, item_changeset: item_changeset)
   end
 
   def edit(conn, %{"id" => id}) do
