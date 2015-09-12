@@ -1,0 +1,13 @@
+table.table.table-condensed
+  thead
+    tr
+      th Project
+      th Description
+      th Estimated Budget
+      th Procurement Mode
+      th Quantity
+      th Unit
+      th Remarks
+  tbody
+    = for item <- @ppmp.items do
+      = render("item.html", item: item)
