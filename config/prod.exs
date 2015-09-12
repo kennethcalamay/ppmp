@@ -27,6 +27,7 @@ config :oppcis, Oppcis.Endpoint,
 config :oppcis, Oppcis.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
+  url: {:system, "DATABASE_URL"},
   pool_size: 20
 
 # ## SSL Support
