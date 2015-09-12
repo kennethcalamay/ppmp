@@ -1,0 +1,42 @@
+doctype html
+
+html lang="en"
+
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    meta name="description" content=""
+    meta name="author" content=""
+
+    title Hello Phoenix!
+    link rel="stylesheet" href="#{static_path(@conn, "/css/app.css")}"
+
+  body
+    div class="container" role="main"
+
+      div role="navigation"
+        ul class="nav nav-tabs"
+          li role="presentation" class="active"
+            a href="#" PPMP
+          li role="presentation"
+            a href="#" Budget
+          li role="presentation"
+            a href="#" APP
+          li role="presentation"
+            a href="#" PMR
+          li role="presentation"
+            a href="#" CPMR
+          li role="presentation"
+            a href="#" APCPI
+
+      div class="header"
+        span class="logo"
+
+      /p class="alert alert-info" role="alert" = get_flash(@conn, :info)
+      /p class="alert alert-danger" role="alert" = get_flash(@conn, :error)
+
+      = @inner
+
+    script src="//code.jquery.com/jquery-2.1.4.min.js"
+    script src="#{static_path(@conn, "/js/app.js")}"
