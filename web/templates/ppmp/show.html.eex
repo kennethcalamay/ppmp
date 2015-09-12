@@ -19,5 +19,35 @@
 
 </ul>
 
+<div class="panel panel-default">
+  <div class="panel-heading"></div>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <td>Project</td>
+        <td>Description</td>
+        <td>Estimated Budget</td>
+        <td>Procurement Mode</td>
+        <td>Quantity</td>
+        <td>Unit</td>
+        <td>Remarks</td>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for item <- @ppmp.items do %>
+        <tr>
+          <td><%= item.project %></td>
+          <td><%= item.description %></td>
+          <td><%= item.estimated_budget %></td>
+          <td><%= item.procurement_mode %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.unit %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 <%= link "Edit", to: ppmp_path(@conn, :edit, @ppmp) %>
 <%= link "Back", to: ppmp_path(@conn, :index) %>

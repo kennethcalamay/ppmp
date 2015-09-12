@@ -29,7 +29,7 @@ defmodule Oppcis.PPMPController do
   end
 
   def show(conn, %{"id" => id}) do
-    ppmp = Repo.get!(PPMP, id)
+    ppmp = Repo.get!(PPMP, id) |> Repo.preload(:items)
     render(conn, "show.html", ppmp: ppmp)
   end
 
