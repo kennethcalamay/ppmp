@@ -3,6 +3,7 @@ defmodule Oppcis.Item do
 
   schema "items" do
     field :project, :string
+    field :category, :string
     field :description, :string
     field :estimated_budget, :integer
     field :funding, :string
@@ -16,7 +17,7 @@ defmodule Oppcis.Item do
     timestamps
   end
 
-  @required_fields ~w(project description estimated_budget funding procurement_mode procurement_type contract_type quantity unit)
+  @required_fields ~w(project description estimated_budget funding procurement_mode procurement_type contract_type quantity unit ppmp_id)
   @optional_fields ~w()
 
   @doc """

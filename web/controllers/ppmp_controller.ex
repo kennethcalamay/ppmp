@@ -63,10 +63,10 @@ defmodule Oppcis.PPMPController do
         conn
         |> put_flash(:info, "PPMP updated successfully.")
         |> redirect(to: ppmp_path(conn, :show, ppmp))
-      {:error, _changeset} ->
+      {:error, changeset} ->
         conn
-        |> put_flash(:alert, "PPMP was not updated.")
-        |> redirect(to: ppmp_path(conn, :index))
+        |> put_flash(:error, "PPMP was not updated.")
+        |> redirect(to: ppmp_path(conn, :index, changeset.model))
     end
   end
 

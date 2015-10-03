@@ -31,7 +31,7 @@ div class="modal-dialog modal-lg" role="document"
         .panel.panel-default style="padding: 15px;"
           .row
             = render "text_field_group.html", form: f, field: :quantity, colsize: 3
-            = render "select_field_group.html", form: f, field: :funding, colsize: 9, values: measurement_units
+            = render "select_field_group.html", form: f, field: :unit, colsize: 9, values: measurement_units
           .row
             = for month <- ~w(Jan Feb Mar Apr May Jun) do
               .col-sm-2
