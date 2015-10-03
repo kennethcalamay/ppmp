@@ -57,9 +57,22 @@ defmodule Oppcis.PPMPController do
     end
   end
 
+  def delete(conn, %{"id" => id}) do
+    ppmp = Repo.get!(PPMP, id)
+
+    # Here we use delete! (with a bang) because we expect
+    # it to always work (and if it does not, it will raise).
+    Repo.delete!(ppmp)
+
+    conn
+    |> put_flash(:info, "Ppmp deleted successfully.")
+    |> redirect(to: ppmp_path(conn, :index))
+  end
+
   def mark_for_review(conn, params) do
-    ppmp = Repo.get(PPMP, params["id"])
+    ppmp = Repo.get!(PPMP, params["id"])
     changeset = PPMP.changeset(ppmp, %{"status" => "for nep review"})
+
     case Repo.update(changeset) do
       {:ok, _ppmp} ->
         conn
@@ -72,28 +85,20 @@ defmodule Oppcis.PPMPController do
     end
   end
 
-  def approve(conn, params) do
-    case PPMP.Approve.process(params) do
-      {:ok, ppmp} ->
+  def approve(conn, %{"id" => id}) do
+    ppmp = Repo.get!(PPMP, id)
+    changeset = PPMP.changeset(ppmp, %{"status" => "approve"})
+
+    case Repo.update(changeset) do
+      {:ok, _ppmp} ->
         conn
         |> put_flash(:info, "PPMP updated successfully.")
-        |> redirect(to: ppmp_path(conn, :show, ppmp))
-      {:error, changeset} ->
+        |> redirect(to: ppmp_path(conn, :index))
+      {:error, _changeset} ->
         conn
         |> put_flash(:error, "PPMP was not updated.")
-        |> redirect(to: ppmp_path(conn, :index, changeset))
+        |> redirect(to: ppmp_path(conn, :index))
     end
-  end
 
-  def delete(conn, %{"id" => id}) do
-    ppmp = Repo.get!(PPMP, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(ppmp)
-
-    conn
-    |> put_flash(:info, "Ppmp deleted successfully.")
-    |> redirect(to: ppmp_path(conn, :index))
   end
 end
