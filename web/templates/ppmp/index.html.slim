@@ -24,8 +24,8 @@ table.table
         td 
           = link "Edit", to: ppmp_path(@conn, :show, ppmp), class: "btn btn-xs btn-warning"
           ' &nbsp;
-          = link "Delete", to: ppmp_path(@conn, :delete, ppmp), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs", style: ""
+          = link "Delete", to: ppmp_path(@conn, :delete, ppmp), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
           ' &nbsp;
-          = link "NEP", to: ppmp_path(@conn, :edit, ppmp), class: "btn btn-xs btn-info"
+          = link "NEP", to: ppmp_path(@conn, :mark_for_review, ppmp), method: :patch, class: "btn btn-xs btn-info"
           ' &nbsp;
-          = link "Approve", to: ppmp_path(@conn, :edit, ppmp), class: "btn btn-xs btn-success"
+          = link "Approve", to: ppmp_path(@conn, :approve, ppmp), method: :patch, class: "btn btn-xs btn-success"

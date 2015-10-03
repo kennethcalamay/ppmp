@@ -57,6 +57,21 @@ defmodule Oppcis.PPMPController do
     end
   end
 
+  def mark_for_review(conn, params) do
+    ppmp = Repo.get(PPMP, params["id"])
+    changeset = PPMP.changeset(ppmp, %{"status" => "for nep review"})
+    case Repo.update(changeset) do
+      {:ok, _ppmp} ->
+        conn
+        |> put_flash(:info, "Marked for review")
+        |> redirect(to: ppmp_path(conn, :index))
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:error, "Mark for review failed")
+        |> redirect(to: ppmp_path(conn, :index))
+    end
+  end
+
   def approve(conn, params) do
     case PPMP.Approve.process(params) do
       {:ok, ppmp} ->
@@ -66,7 +81,7 @@ defmodule Oppcis.PPMPController do
       {:error, changeset} ->
         conn
         |> put_flash(:error, "PPMP was not updated.")
-        |> redirect(to: ppmp_path(conn, :index, changeset.model))
+        |> redirect(to: ppmp_path(conn, :index, changeset))
     end
   end
 

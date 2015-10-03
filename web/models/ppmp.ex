@@ -10,8 +10,8 @@ defmodule Oppcis.PPMP do
     timestamps
   end
 
-  @required_fields ~w(code status year)
-  @optional_fields ~w(status year)
+  @required_fields ~w(status year)
+  @optional_fields ~w(code)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

@@ -18,9 +18,10 @@ defmodule Oppcis.Router do
 
     get "/", PPMPController, :index, as: :root
     resources "/ppmps", PPMPController do
-      patch "/approve", PPMPController, :approve, as: :approve
       resources "/items", ItemController
     end
+    patch "ppmps/:id/mark_for_review", PPMPController, :mark_for_review
+    patch "ppmps/:id/approve", PPMPController, :approve
   end
 
   # Other scopes may use custom stacks.
