@@ -24,9 +24,8 @@ defmodule Oppcis.Web do
 
   def operation do
     quote do
-      use Ecto.Model
+      import Ecto.Changeset
       alias Oppcis.Repo
-      schema "", do: nil
     end
   end
 

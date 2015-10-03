@@ -1,33 +1,35 @@
 defmodule Oppcis.PPMP.Approve do
   use Oppcis.Web, :operation
-
+  import Ecto.Query
   alias Oppcis.PPMP
 
-  @required_fields ~w(year status)
-  @optional_fields ~w(code)
+  def process(%{"id" => id}) do
+    ppmp = Repo.get!(PPMP, id)
+    code = generate_code(ppmp)
 
-  def process(%{"id" => id, "ppmp" => ppmp_params}) do
-    ppmp      = Repo.get!(PPMP, id)
-    changeset = changeset(ppmp, ppmp_params)
+    changeset = changeset(ppmp, %{status: "approved", code: code})
     Repo.update(changeset)
   end
 
-  # private
-
   defp changeset(model, params \\ :empty) do
     model
-    |> cast(assign_code(params), @required_fields, @optional_fields)
+    |> cast(params, ~w(status code), ~w())
   end
 
-  defp assign_code(params) do
-    case params do
-      :empty  -> params
-      _params -> Map.put(params, "code", generate_code(params))
+  defp generate_code(%PPMP{year: year}) do
+    code = last_ppmp_code(year)
+    cond do
+      code in ["", nil] ->
+        year <> "-" <> "1"
+      true ->
+        [^year, num] = String.split(code, "-")
+        incremented  = String.to_integer(num) + 1
+        year <> "-" <> Integer.to_string(incremented)
     end
   end
 
-  defp generate_code(params) do
-    %{ "year" => year } = params
-    year <> "-tail"
+  defp last_ppmp_code(year) do
+    Repo.one from p in PPMP, where: p.year == ^year, order_by: p.code, select: p.code, limit: 1
   end
+
 end

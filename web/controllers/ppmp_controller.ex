@@ -85,11 +85,8 @@ defmodule Oppcis.PPMPController do
     end
   end
 
-  def approve(conn, %{"id" => id}) do
-    ppmp = Repo.get!(PPMP, id)
-    changeset = PPMP.changeset(ppmp, %{"status" => "approve"})
-
-    case Repo.update(changeset) do
+  def approve(conn, params) do
+    case PPMP.Approve.process(params) do
       {:ok, _ppmp} ->
         conn
         |> put_flash(:info, "PPMP updated successfully.")
