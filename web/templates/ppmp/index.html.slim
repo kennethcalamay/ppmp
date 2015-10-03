@@ -1,0 +1,31 @@
+h2 Project Procurement Management Plans
+
+table.table
+  thead
+    tr
+      th Code
+      th Year
+      th Estimated Budget
+      th Status
+      th Last Updated By
+      th Last Updated
+      th Actions
+
+  tbody
+    = for ppmp <- @ppmps do
+      tr
+        td = ppmp.code
+        td = ppmp.year
+        td 
+        td
+          em = String.capitalize(ppmp.status)
+        td 
+        td 
+        td 
+          = link "Edit", to: ppmp_path(@conn, :show, ppmp), class: "btn btn-xs btn-warning"
+          ' &nbsp;
+          = link "Delete", to: ppmp_path(@conn, :delete, ppmp), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs", style: ""
+          ' &nbsp;
+          = link "NEP", to: ppmp_path(@conn, :edit, ppmp), class: "btn btn-xs btn-info"
+          ' &nbsp;
+          = link "Approve", to: ppmp_path(@conn, :edit, ppmp), class: "btn btn-xs btn-success"
